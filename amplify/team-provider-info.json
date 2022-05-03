@@ -1,0 +1,23 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-encryptionwebsite-dev-01001-authRole",
+      "UnauthRoleArn": "arn:aws:iam::056347565213:role/amplify-encryptionwebsite-dev-01001-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::056347565213:role/amplify-encryptionwebsite-dev-01001-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-encryptionwebsite-dev-01001-deployment",
+      "UnauthRoleName": "amplify-encryptionwebsite-dev-01001-unauthRole",
+      "StackName": "amplify-encryptionwebsite-dev-01001",
+      "StackId": "arn:aws:cloudformation:us-east-1:056347565213:stack/amplify-encryptionwebsite-dev-01001/c4772940-b6f1-11ec-927f-12c8101c8f15",
+      "AmplifyAppId": "dkh4fwxdmr1ki"
+    },
+    "categories": {
+      "function": {
+        "encryptionwebsitef1e20b59": {
+          "deploymentBucketName": "amplify-encryptionwebsite-dev-01001-deployment",
+          "s3Key": "amplify-builds/encryptionwebsitef1e20b59-4449415a36474c676543-build.zip"
+        }
+      }
+    }
+  }
+}

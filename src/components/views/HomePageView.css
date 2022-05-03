@@ -1,0 +1,70 @@
+/* Add a black background color to the top navigation */
+.sidenav {
+  background-color: #284177;
+  overflow: hidden;
+  padding-top: 20px;
+display: flex;
+flex-direction: column;
+align-items: center;
+height: 100%;
+width: 15%;
+position: fixed;
+z-index: 1;
+top: 0;
+left: 0;
+}
+
+/* Style the links inside the navigation bar */
+.sidenav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 20px;
+  margin: 5px;
+}
+
+/* Change the color of links on hover */
+.sidenav a:hover {
+  background-color: #fff;
+  color: #284177;
+  transition-duration: 0.5s;
+  height:25px;
+  width:150px;
+}
+
+/* Add a color to the active/current link */
+.sidenav a.active {
+  background-color: #04AA6D;
+  color: white;
+}
+
+.btn {
+  color: #284177;
+  background-color: #ffffff;
+  border-radius: 10px;
+  border: 6px double #016abd;
+  padding-right: 5px;
+  font-family: arial;
+  text-align: center;
+  font-size:20px;
+  height:75px;
+  width:200px;
+  margin-right: 10px;
+}
+/* Change the color of links on hover */
+.btn:hover {
+  color: #ffffff;
+  background-color: #284177;
+  border-radius: 10px;
+  border: 6px double #ffffff;
+  padding-right: 5px;
+  font-family: arial;
+  text-align: center;
+  font-size:20px;
+  height: 75px;
+  width:200px;
+  margin-right: 10px;
+  transition-duration: 0.5s;
+}

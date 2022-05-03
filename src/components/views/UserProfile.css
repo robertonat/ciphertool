@@ -1,0 +1,46 @@
+.line{
+  border-bottom: 2px solid #ccc;
+  display:block;
+}
+.flex-box{
+  margin-left: 300px;
+  display: flex;
+}
+.progressBox{
+  flex: 1;
+  padding:5px;
+  outline: #555555 solid 3px;
+  outline-offset: 5px;
+  padding: 5px;
+  height:300px;
+  width: 300px;
+}
+.progressText{
+  font-family: Serif;
+  font-size: 20px;
+  position:relative;
+  left:-60px;
+}
+.savedEncryptions{
+  flex: 1;
+  padding:5px;
+  outline: #555555 solid 3px;
+  outline-offset: 5px;
+  padding: 5px;
+  height:300px;
+  width: 300px;
+}
+
+.progressBox+savedEncryptions{
+ margin-left: 10px;
+}
+
+.learnMore{
+  padding:5px;
+  margin-left: 400px;
+  outline: #555555 solid 5px;
+  outline-offset: 5px;
+  padding: 5px;
+  width: 300px;
+  opacity: 0;
+}

@@ -1,0 +1,22 @@
+.articleBox{
+
+  min-height: 200px;
+  min-width: 500px;
+
+}
+.articleBoxHeader{
+  color: black;
+  text-align: left;
+  font-size: 20px;
+  margin-left: -40px; 
+}
+.articleBoxContent{
+
+  font-size: 20px;
+  margin-left: 30px;
+  text-align: left;
+}
+.line{
+  border-bottom: 2px solid #ccc;
+  display:block;
+}

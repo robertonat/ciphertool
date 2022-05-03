@@ -1,0 +1,23 @@
+.userbox {
+    padding:5px;
+    margin:15%;
+    outline: #C2AFA8 solid 5px;
+    outline-offset: 5px;
+  }
+
+#userloglabel {
+    display: inline-block;
+    width: 30%;
+    text-align: right;
+    margin: 1% 2%;
+}
+
+#userloginput {
+  display: inline-block;
+  width: 30%;
+  margin: 1% 2%;
+}
+.passwordReqs{
+  font-size: 15px;
+  margin-bottom: -35px;
+}

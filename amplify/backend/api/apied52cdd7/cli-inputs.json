@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "paths": {
+    "/users/{userId}": {
+      "name": "/users/{userId}",
+      "lambdaFunction": "encryptionwebsitef1e20b59",
+      "permissions": {
+        "setting": "open"
+      }
+    }
+  }
+}
