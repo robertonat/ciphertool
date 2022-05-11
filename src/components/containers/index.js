@@ -7,4 +7,3 @@ export { default as SignUpContainer } from "./SignUpContainer";
 export { default as VigenereCipherContainer } from "./VigenereCipherContainer";
 export { default as UserProfileContainer } from "./UserProfileContainer";
 export { default as DESContainer } from "./DESContainer";
-export { Account} from "./Account";
