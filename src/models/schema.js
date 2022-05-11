@@ -1,13 +1,20 @@
 export const schema = {
     "models": {
-        "UserProgress": {
-            "name": "UserProgress",
+        "UserInformation": {
+            "name": "UserInformation",
             "fields": {
                 "id": {
                     "name": "id",
                     "isArray": false,
                     "type": "ID",
                     "isRequired": true,
+                    "attributes": []
+                },
+                "UserName": {
+                    "name": "UserName",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
                     "attributes": []
                 },
                 "Quiz0": {
@@ -17,104 +24,25 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "UserProgress": {
-                    "name": "UserProgress",
+                "RC4Quiz": {
+                    "name": "RC4Quiz",
                     "isArray": false,
-                    "type": {
-                        "model": "UserLogin"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "association": {
-                        "connectionType": "HAS_ONE",
-                        "associatedWith": "id",
-                        "targetName": "userProgressUserProgressId"
-                    }
-                },
-                "createdAt": {
-                    "name": "createdAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                },
-                "updatedAt": {
-                    "name": "updatedAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                },
-                "userProgressUserProgressId": {
-                    "name": "userProgressUserProgressId",
-                    "isArray": false,
-                    "type": "ID",
+                    "type": "Int",
                     "isRequired": false,
                     "attributes": []
-                }
-            },
-            "syncable": true,
-            "pluralName": "UserProgresses",
-            "attributes": [
-                {
-                    "type": "model",
-                    "properties": {}
                 },
-                {
-                    "type": "auth",
-                    "properties": {
-                        "rules": [
-                            {
-                                "allow": "public",
-                                "operations": [
-                                    "create",
-                                    "update",
-                                    "delete",
-                                    "read"
-                                ]
-                            }
-                        ]
-                    }
-                }
-            ]
-        },
-        "UserLogin": {
-            "name": "UserLogin",
-            "fields": {
-                "id": {
-                    "name": "id",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "userName": {
-                    "name": "userName",
-                    "isArray": false,
+                "SavedEncryptions": {
+                    "name": "SavedEncryptions",
+                    "isArray": true,
                     "type": "String",
                     "isRequired": false,
-                    "attributes": []
+                    "attributes": [],
+                    "isArrayNullable": true
                 },
                 "email": {
                     "name": "email",
                     "isArray": false,
-                    "type": "AWSEmail",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "password": {
-                    "name": "password",
-                    "isArray": false,
                     "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "userID": {
-                    "name": "userID",
-                    "isArray": false,
-                    "type": "ID",
                     "isRequired": false,
                     "attributes": []
                 },
@@ -136,7 +64,7 @@ export const schema = {
                 }
             },
             "syncable": true,
-            "pluralName": "UserLogins",
+            "pluralName": "UserInformations",
             "attributes": [
                 {
                     "type": "model",
@@ -163,5 +91,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "773e1afdb936163f36674ecfbd057a3d"
+    "version": "3364f4e3b4b4b1e1edd232026aa94064"
 };

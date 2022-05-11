@@ -4,33 +4,19 @@ import { ModelInit, MutableModel, PersistentModelConstructor } from "@aws-amplif
 
 
 
-type UserProgressMetaData = {
+type UserInformationMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
-type UserLoginMetaData = {
-  readOnlyFields: 'createdAt' | 'updatedAt';
-}
-
-export declare class UserProgress {
+export declare class UserInformation {
   readonly id: string;
+  readonly UserName?: string | null;
   readonly Quiz0?: number | null;
-  readonly UserProgress?: UserLogin | null;
-  readonly createdAt?: string | null;
-  readonly updatedAt?: string | null;
-  readonly userProgressUserProgressId?: string | null;
-  constructor(init: ModelInit<UserProgress, UserProgressMetaData>);
-  static copyOf(source: UserProgress, mutator: (draft: MutableModel<UserProgress, UserProgressMetaData>) => MutableModel<UserProgress, UserProgressMetaData> | void): UserProgress;
-}
-
-export declare class UserLogin {
-  readonly id: string;
-  readonly userName?: string | null;
+  readonly RC4Quiz?: number | null;
+  readonly SavedEncryptions?: (string | null)[] | null;
   readonly email?: string | null;
-  readonly password?: string | null;
-  readonly userID?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-  constructor(init: ModelInit<UserLogin, UserLoginMetaData>);
-  static copyOf(source: UserLogin, mutator: (draft: MutableModel<UserLogin, UserLoginMetaData>) => MutableModel<UserLogin, UserLoginMetaData> | void): UserLogin;
+  constructor(init: ModelInit<UserInformation, UserInformationMetaData>);
+  static copyOf(source: UserInformation, mutator: (draft: MutableModel<UserInformation, UserInformationMetaData>) => MutableModel<UserInformation, UserInformationMetaData> | void): UserInformation;
 }

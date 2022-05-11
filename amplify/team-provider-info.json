@@ -17,6 +17,9 @@
           "deploymentBucketName": "amplify-encryptionwebsite-dev-01001-deployment",
           "s3Key": "amplify-builds/encryptionwebsitef1e20b59-4449415a36474c676543-build.zip"
         }
+      },
+      "auth": {
+        "encryptionwebsite": {}
       }
     }
   }

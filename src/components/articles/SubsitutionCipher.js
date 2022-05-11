@@ -97,11 +97,7 @@ const SubsitutionCipher = (props) => {
 			        For example, in row <strong>S</strong> (from <i>STRAW</i>), the ciphertext <strong>T</strong> appears in column <strong>B</strong>, so <strong><i>b</i></strong> is the first plaintext letter. Next, in row <strong>T</strong> (from <i>STRAW</i>), the ciphertext <strong>T</strong> is located in column <strong>A</strong>. Thus <strong><i>a</i></strong> is the second plaintext letter.</div>
 			<br></br>
 			</body>
-			<strong>Test your knowledge of subsitution ciphers with this quiz</strong>
-			<br/>
-			<Link to="/Articles/Quiz0">
-			<button>Start Quiz</button>
-			</Link>
+			<strong><Link to={"/Signup"}>Create an account</Link> or <Link to={"/Login"}>Log in</Link> to test your knowledge of subsitution ciphers with this quiz</strong>
 			</html>
 	)
 }

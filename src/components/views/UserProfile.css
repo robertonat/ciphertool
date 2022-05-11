@@ -3,17 +3,17 @@
   display:block;
 }
 .flex-box{
-  margin-left: 300px;
+  margin-left: 10%;
+  margin-right:10%;
+  padding: 2%;
   display: flex;
+  background-color: #FFFFFf;
+  gap: 20px 20px
 }
-.progressBox{
+.progress{
   flex: 1;
-  padding:5px;
-  outline: #555555 solid 3px;
-  outline-offset: 5px;
-  padding: 5px;
-  height:300px;
-  width: 300px;
+  background-color: #ece8e5;
+  padding: 1%;
 }
 .progressText{
   font-family: Serif;
@@ -21,26 +21,38 @@
   position:relative;
   left:-60px;
 }
+.progressText{
+  font-size: 20px;
+  position:relative;
+  left:0px;
+}
 .savedEncryptions{
   flex: 1;
-  padding:5px;
-  outline: #555555 solid 3px;
-  outline-offset: 5px;
-  padding: 5px;
-  height:300px;
-  width: 300px;
+  background-color: #ece8e5;
+  padding: 1%;
 }
 
-.progressBox+savedEncryptions{
+.progress+savedEncryptions{
  margin-left: 10px;
 }
+.module{
+  min-height: 150px;
+  min-width: 450px;
+}
 
-.learnMore{
-  padding:5px;
-  margin-left: 400px;
-  outline: #555555 solid 5px;
-  outline-offset: 5px;
-  padding: 5px;
-  width: 300px;
-  opacity: 0;
+.moduleHeader{
+  color: black;
+  text-align: left;
+  font-size: 20px;
+  margin-left: 30px;
+}
+.moduleContent{
+  font-size: 20px;
+  margin-left: 30px;
+  text-align: left;
+}
+
+#user:hover{
+  color: #ffffff;
+  background-color: #c2afa8;
 }

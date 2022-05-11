@@ -1,14 +1,9 @@
-type UserProgress @model @auth(rules: [{allow: public}]) {
+type UserInformation @model @auth(rules: [{allow: public}]) {
   id: ID!
+  UserName: String
   Quiz0: Int
-  UserProgress: UserLogin @hasOne
-}
-
-type UserLogin @model @auth(rules: [{allow: public}]) {
-  id: ID!
-  userName: String
-  email: AWSEmail
-  password: String
-  userID: ID
+  RC4Quiz: Int
+  SavedEncryptions: [String]
+  email: String
 }
  

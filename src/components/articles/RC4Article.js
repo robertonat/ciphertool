@@ -101,11 +101,7 @@ const RC4Article = (props) => {
 			    </ul>
 				<br></br>
 			</body>
-			<strong>Test your knowledge of RC4 ciphers with this quiz</strong>
-			<br/>
-			<Link to="/Articles/RC4Quiz">
-			<button>Start Quiz</button>
-			</Link>
+			<strong><Link to={"/Signup"}>Create an account</Link> or <Link to={"/Login"}>Log in</Link> to test your knowledge of RC4 with this quiz</strong>
 
 			</html>
 

@@ -1,8 +1,11 @@
 import { Link } from "react-router-dom";
 import SideNavigation from "./SideNavigation";
+import CaesarCipher from '../images/top.png'
+import Dial from '../images/caesar_cipher_dial.png'
+import './CaesarCipher.css'
 
 const CaesarCipherView = (props) => {
-  const { init, handleShiftChange, handleChange, handleSubmit } = props;
+  const { handleChange, handleShiftChange, handleSubmit } = props;
   document.title = "Caesar Cipher";
   return (
     <div>
@@ -38,7 +41,7 @@ const CaesarCipherView = (props) => {
             steps="1.0"
             min="0"
             max="26"
-            onChange={"(e) => handleChange(e);"}
+            onChange={(e) => handleShiftChange(e)}
           />
 
           <br />
@@ -76,9 +79,10 @@ const CaesarCipherView = (props) => {
           </div>
         </div>
       </div>
-      <body  onLoad={()=> init()}>
-      <canvas id="caesar" width="500" height="500"></canvas>
-      </body>
+      <div class="parent">
+        <img class="base" src={CaesarCipher} alt="Dial"  width="500" height="500"/>
+        <img class="letters" src={Dial} alt="Dial"  width="500" height="500" style={{transform: `rotate(auto)`}}/>
+      </div>
       <br></br>
       <Link to={"/Articles/SubsitutionCipher"}>
         Learn more about Caesar Cipher

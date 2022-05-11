@@ -1,0 +1,26 @@
+.parent {
+  position: relative;
+  display: flex;
+  justify-content: center;
+      }
+.letters {
+  position: absolute;
+   z-index: 3;
+           }
+.base {
+  position: relative;
+     z-index: 1;
+     }
+     @media (prefers-reduced-motion: no-preference) {
+       .letters {
+         animation: letters-spin infinite 20s linear;
+       }
+     }
+  @keyframes letters-spin {
+       from {
+         transform: rotate(0deg);
+       }
+       to {
+         transform: rotate(360deg);
+       }
+     }
