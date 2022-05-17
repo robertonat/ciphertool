@@ -5,6 +5,12 @@
   padding: 10px;
   margin: 5%;
 }
+
+#caesar {
+  width: 1500px;
+  grid-template-columns: 33% 33% 33%;
+}
+
 .grid-item {
   background-color: rgba(255, 255, 255, 0.8);
   border: 1px solid rgba(0, 0, 0, 0.8);

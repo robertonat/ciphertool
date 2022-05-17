@@ -1,38 +1,46 @@
 import UserProfileView from '../views/UserProfileView';
 import React, { Component } from "react";
-import { connect } from "react-redux";
 import { DataStore } from '@aws-amplify/datastore';
-import { UserLogin } from '../../models';
-import Amplify, { API } from 'aws-amplify';
+import { UserInformation } from '../../models';
+import { Auth } from 'aws-amplify'
 
 
 class UserProfileContainer extends Component {
   constructor(props){
      super(props);
      this.state = {
-       username: "",
-       email: "",
-       api: "apied52cdd7",
-       path: "/users"
+       savedEncryptions: []
      };
  }
+ async createList(){
+   for(let word in this.state.savedEncryptions){
+     const lis = document.createElement("li")
+     const node = document.createTextNode(this.state.savedEncryptions[word]);
+     lis.appendChild(node);
+     lis.style.overflow = 'auto'
+     const element = document.getElementById("List body")
+     element.appendChild(lis)
 
-  startUp = event =>{
-    API.get(this.state.api, this.state.path + "/" + "a")
-    .then(response => {
-        alert(JSON.stringify(response))
-      })
-      .catch(error => {
-        alert(error)
-      })
-//    const models =  DataStore.query(UserLogin);
-//    const fields =  JSON.stringify(models);
-//    alert(JSON.stringify(models))
-  }
+   }
+ }
+ async componentDidMount(){
+   try{
+     const user = await Auth.currentAuthenticatedUser();
+     const userMod = await DataStore.query(UserInformation, c => c.email("eq" ,user.attributes.email));
+     const singleUser = await DataStore.query(UserInformation, userMod[0].id);
+     await this.setState({savedEncryptions: singleUser.SavedEncryptions});
+     await this.createList();
+     console.log(this.state.savedEncryptions)
+   }
+   catch(error){
+     console.log(error)
+   }
+
+ }
+
   render(){
   return (
-    <UserProfileView
-    startUp = {this.startUp} />
+    <UserProfileView />
   );
 }
 };

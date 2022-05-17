@@ -1,11 +1,9 @@
-import SideNavigation from "./SideNavigation";
 import "./LoginView.css"
 const SignUpView = (props) => {
   document.title = "Sign Up";
-  const {handleChange, handleSubmit } = props;
+  const { handleChange, handleSubmit } = props;
   return (
     <div>
-      <SideNavigation />
       <div class="userbox">
       <h3>Sign up</h3>
       <form  onSubmit={(e) => handleSubmit(e)}>
@@ -18,12 +16,16 @@ const SignUpView = (props) => {
           <input id="userloginput" type="text" name="email" onChange={(e) => handleChange(e)} />
         </div>
         <div>
-          <label id="userloglabel" htmlFor="password">Password </label>
+          <label id="userloglabel" htmlFor="userName">Phone Number</label>
+          <input id="userloginput" type="text" name="phone" onChange={(e) => handleChange(e)} />
+        </div>
+        <div>
+          <label id="userloglabel" htmlFor="password">Password</label>
           <input id="userloginput" type="password" name="password" onChange={(e) => handleChange(e)} />
         </div>
         <label id="userloglabel" htmlFor="password">Repeat your password </label>
         <input id="userloginput" type="password" name="password" onChange={(e) => handleChange(e)} />
-        <p class="passwordReqs">Password minimun length: 8</p> <br/>
+        <p class="passwordReqs">Password minimum length: 8</p> <br/>
         <p class="passwordReqs">Requires numbers</p><br/>
         <p class="passwordReqs">Requires Special character</p> <br/ >
         <p class="passwordReqs">Requires Uppercase letters</p> <br/ >

@@ -1,5 +1,4 @@
 import {Link} from 'react-router-dom';
-import SideNavigation from '../views/SideNavigation';
 import Vigenere_square from '../images/Vigenere_square.png'
 import "./article.css";
 
@@ -103,7 +102,6 @@ const SubsitutionCipher = (props) => {
 }
 return(
 	<div>
-	<SideNavigation/>
 	{SubsitutionCipherView()}
 	<Link to={'/'} >
 			Home Page

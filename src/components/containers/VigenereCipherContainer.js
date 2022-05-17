@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import VigenereCipherView from '../views/VigenereCipherView';
-
+import { DataStore } from '@aws-amplify/datastore';
+import { UserInformation } from '../../models';
+import { Auth } from 'aws-amplify'
 class VigenereCipherContainer extends Component{
 
   constructor(props){
@@ -8,9 +10,38 @@ class VigenereCipherContainer extends Component{
        this.state = {
          initial: "",
          encrypted: "",
-         key: ""
+         key: "",
+         userid: ""
        };
    }
+   async componentDidMount(){
+     try{
+       const user = await Auth.currentAuthenticatedUser();
+       const userMod = await DataStore.query(UserInformation, c => c.email("eq" ,user.attributes.email));
+       this.setState({ userid: userMod[0].id});
+     }
+     catch(error){
+       console.log(error)
+     }
+
+   }
+
+   updateEncryptions = async (encryption) =>{
+     const singleUser = await DataStore.query(UserInformation, this.state.userid);
+     let newEncryptions = []
+     if(singleUser.SavedEncryptions.length<1){newEncryptions = newEncryptions + encryption}
+     else {
+     newEncryptions = newEncryptions + encryption +","
+     newEncryptions = newEncryptions + singleUser.SavedEncryptions.slice(0,15)
+     }
+     /* Models in DataStore are immutable. To update a record you must use the copyOf function
+     to apply updates to the item’s fields rather than mutating the instance directly */
+     await DataStore.save(UserInformation.copyOf(singleUser, item => {
+       item.SavedEncryptions = newEncryptions.split(",");// Update the values on {item} variable to update DataStore entry
+     }));
+   }
+
+
    vigenereCipherAnimation = async () =>{
      await this.vigenereCipher(); //runs the vigenereCipher function and makes this function wait for it to finish.
      document.getElementById("p1").innerHTML = this.state.initial;
@@ -35,6 +66,7 @@ class VigenereCipherContainer extends Component{
     }
 
      }
+     if(encryptedPlaceHolder.length <60) this.updateEncryptions(encryptedPlaceHolder);
    }
 
 
@@ -68,7 +100,7 @@ class VigenereCipherContainer extends Component{
      this.setState({
        encrypted: encrypted
        });
-
+       if(encrypted.length <60) this.updateEncryptions(encrypted);
    }
 
    handleChange = event => {

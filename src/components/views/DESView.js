@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import SideNavigation from "./SideNavigation";
 import "./ColumnLayout.css";
 
 const DESView = (props) => {
@@ -8,8 +7,6 @@ const DESView = (props) => {
   return(
 
     <div>
-
-        <SideNavigation/>
 
         <h1>DES </h1>
         <div class="grid-container">

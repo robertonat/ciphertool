@@ -15,6 +15,7 @@ export declare class UserInformation {
   readonly RC4Quiz?: number | null;
   readonly SavedEncryptions?: (string | null)[] | null;
   readonly email?: string | null;
+  readonly phone?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   constructor(init: ModelInit<UserInformation, UserInformationMetaData>);

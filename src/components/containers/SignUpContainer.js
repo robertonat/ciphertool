@@ -1,10 +1,9 @@
 import { Component } from 'react';
-import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import UserPool from "./UserPool"
 import SignUpView from '../views/SignUpView';
 import { DataStore } from '@aws-amplify/datastore';
-
+import { UserInformation } from '../../models';
 
 
 class SignUpContainer extends Component {
@@ -13,7 +12,7 @@ class SignUpContainer extends Component {
      this.state = {
        username: "",
        email: "",
-       password:"",
+       phone: "",
        redirect: false,
        redirectId: null,
 
@@ -27,19 +26,32 @@ class SignUpContainer extends Component {
    });
  }
 
+
+
  handleSubmit = async event => {
      event.preventDefault();
      UserPool.signUp(this.state.email, this.state.password, [], null, (err,data) =>{
        if(err){
-         alert(err);
+         alert("Email or Password unaccepted");
        }
        else{
          let user = {
              username: this.state.username,
              email: this.state.email,
-             password: this.state.password,
+             phone: this.state.phone,
              redirectId: this.state.username
          };
+         user.phone = "+1"+ user.phone;
+         DataStore.save(
+            new UserInformation({
+        		"UserName": user.username,
+        		"Quiz0": 0,
+        		"RC4Quiz": 0,
+        		"SavedEncryptions": [],
+        		"email": user.email,
+        		"phone": user.phone
+        	})
+        );
          this.setState({
            username: "",
            email: "",

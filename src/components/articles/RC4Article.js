@@ -1,5 +1,5 @@
 import {Link} from 'react-router-dom';
-import SideNavigation from '../views/SideNavigation';
+
 import "./article.css"
 const RC4Article = (props) => {
 	document.title = "Encryption Decryption Article"
@@ -109,7 +109,6 @@ const RC4Article = (props) => {
 }
 		return(
 			<div>
-			<SideNavigation/>
 			{RC4ArticleView()}
 			<br></br>
 		      <Link to={"/"}>Home Page</Link>

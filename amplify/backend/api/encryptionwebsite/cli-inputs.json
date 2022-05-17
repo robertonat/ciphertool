@@ -3,7 +3,7 @@
   "serviceConfiguration": {
     "apiName": "encryptionwebsite",
     "serviceName": "AppSync",
-    "gqlSchemaPath": "/tmp/amplify-6d093141-30c7-488f-9314-c65177639e8b/amplify/backend/api/encryptionwebsite/schema.graphql",
+    "gqlSchemaPath": "/tmp/amplify-c536a329-3ec3-4e3a-90d9-c8be6f91d68a/amplify/backend/api/encryptionwebsite/schema.graphql",
     "defaultAuthType": {
       "mode": "API_KEY",
       "keyDescription": "api key description",

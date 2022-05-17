@@ -1,4 +1,3 @@
-import SideNavigation from './SideNavigation';
 import { Link } from "react-router-dom";
 import "../articles/article.css";
 
@@ -8,7 +7,6 @@ const { handleChange, handleSubmit} = props;
 
     return (
         <div>
-            <SideNavigation />
             <head>
             <meta charset="UTF-8" />
             <meta http-equiv="X-UA-Compatible" content="IE=edge" />

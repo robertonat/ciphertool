@@ -5,5 +5,5 @@ type UserInformation @model @auth(rules: [{allow: public}]) {
   RC4Quiz: Int
   SavedEncryptions: [String]
   email: String
-}
- 
+  phone: String
+} 

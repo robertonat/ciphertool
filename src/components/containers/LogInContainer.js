@@ -1,7 +1,7 @@
 import { Component } from 'react';
-import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import LogInView from '../views/LogInView';
+import VerificationView from '../views/VerificationView'
 import UserPool from "./UserPool"
 import { CognitoUser, AuthenticationDetails } from "amazon-cognito-identity-js";
 
@@ -12,13 +12,25 @@ class LogInContainer extends Component{
             email: "",
             password: "",
             redirect: false,
-            redirectId: null
+            redirectId: null,
+            verify: false,
+            verificationCode: 0,
           };
       }
       handleChange = event => {
         this.setState({
           [event.target.name]: event.target.value
         });
+      }
+      verificationSubmit = event =>{
+
+      }
+      verificationSetUp = event =>{
+        const verificationCode = Math.floor(Math.random() * (9999 - 1000 + 1) + 1000)
+        this.setState({
+          verificationCode: verificationCode
+        })
+
       }
 
       handleSubmit = async event => {
@@ -37,9 +49,10 @@ class LogInContainer extends Component{
             onSuccess: (data) => {
               console.log("onSuccess: ", data);
               this.setState({
-                redirect: true,
-                redirectId: "0"
+                verify: true,
+                redirectId: email
               })
+              this.verificationSetUp();
             },
             onFailure: (err) => {
               console.error("onFailure: ", err);
@@ -59,6 +72,12 @@ class LogInContainer extends Component{
 
     if(this.state.redirect) {
       return (<Redirect to={`/UserProfile/${this.state.redirectId}`}/>)
+    }
+    if(this.state.verify){
+      return(
+        <VerificationView
+        verificationSubmit= {this.verificationSubmit}/>
+      )
     }
 
     return (

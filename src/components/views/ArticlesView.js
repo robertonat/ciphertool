@@ -1,11 +1,9 @@
 import { Link } from "react-router-dom";
-import SideNavigation from "./SideNavigation";
 import './ArticlesPage.css'
 const ArticlesView = () => {
   document.title = "Articles";
   return (
     <div>
-      <SideNavigation />
       <h1> Articles related to encryption</h1>
       <div>
       <Link to={"/Articles/EncryptionDecryption"}>

@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import {Link} from 'react-router-dom';
 import "./article.css";
 import Quiz0View from '../views/Quiz0View'
+import { DataStore } from '@aws-amplify/datastore';
+import { UserInformation } from '../../models';
+import { Auth } from 'aws-amplify'
 
 class Quiz0 extends Component{
   constructor(props){
@@ -22,6 +25,21 @@ class Quiz0 extends Component{
 
    componentDidMount() {
     window.scrollTo(0,0);
+
+  }
+  async submitScore(){
+    try{
+      const user = await Auth.currentAuthenticatedUser();
+      const userMod = await DataStore.query(UserInformation, c => c.email("eq" ,user.attributes.email));
+      const singleUser = await DataStore.query(UserInformation, userMod[0].id);
+      await DataStore.save(UserInformation.copyOf(singleUser, item => {
+        item.Quiz0 = this.state.correct// Update the values on {item} variable to update DataStore entry
+      }));
+    }
+    catch(error){
+      console.log(error)
+    }
+
   }
    //Changes the target value in the state to the answers the person last put in before submitting
   handleChange = event => {
@@ -58,6 +76,7 @@ class Quiz0 extends Component{
        else{this.state.incorrect[this.state.incorrect.length] = 8}
 
        let results = String(this.state.correct);
+       await this.submitScore();
        if(this.state.correct === 8){ document.getElementById("result").innerHTML = "Congratulations you got all 8 questions correct";}
        else{document.getElementById("result").innerHTML = "you got " + results + " right. These are the questions missed " + this.state.incorrect ;}
 

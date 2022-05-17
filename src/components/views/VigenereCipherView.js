@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import SideNavigation from "./SideNavigation";
 import "./ColumnLayout.css";
 const VigenereCipherView = (props) => {
   const {handleChange, handleSubmit} = props;
@@ -8,7 +7,6 @@ const VigenereCipherView = (props) => {
 
     <div>
 
-        <SideNavigation/>
 
         <h1>Vigenere Cipher</h1>
         <div class="grid-container">

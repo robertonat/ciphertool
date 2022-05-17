@@ -1,11 +1,9 @@
 import { Link } from "react-router-dom";
 import "./HomePageView.css";
-import SideNavigation from "./SideNavigation";
 const HomePageView = () => {
   document.title = "Encryption";
   return (
     <div>
-      <SideNavigation />
 
       <h2>Welcome to the Encryption Tool</h2>
       <h3>Click on a cipher to get started.</h3>

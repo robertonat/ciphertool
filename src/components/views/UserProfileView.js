@@ -1,14 +1,11 @@
 import { Link } from 'react-router-dom';
-import SideNavigation from './SideNavigation';
 import './UserProfile.css'
 
 
-const UserProfileView = (props) => {
+const UserProfileView = () => {
 document.title = "User profile";
-const {startUp} = props;
   return (
     <div>
-    <SideNavigation/>
     <h2>Welcome back </h2>
     <div class="flex-box">
 
@@ -56,11 +53,8 @@ const {startUp} = props;
 
       <div class ="savedEncryptions">
         <strong> Saved Encryptions </strong>
-        <li>cswrjad cyyyw</li>
-        <li>dixxwm pvnzjxeqzv</li>
-        <li>64 D9 EB 6A</li>
-        <li>U2FsdGVkX19VdHAviSzw4GLtTOy76Ety </li>
-        <li>pxtam wpcgt</li>
+        <p> saved encryptions have a character limit of 50 </p>
+        <div id ="List body"> </div>
       </div>
 
     </div>
@@ -68,7 +62,6 @@ const {startUp} = props;
     <div class ="learnMore">
       <strong> Learn more </strong>
     </div>
-    <button onClick={(e) => startUp(e)}>test</button>
 
 
 

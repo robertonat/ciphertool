@@ -1,12 +1,10 @@
 import { Link } from 'react-router-dom';
-import SideNavigation from './SideNavigation';
 
 const RC4View = (props) => {
 const {handleChange, handleSubmit, encrypted} = props;
 document.title = "RC4View";
   return (
     <div>
-    <SideNavigation/>
     <h1>RC4 Cipher</h1>
     <div class="grid-container">
       <div class="grid-item">

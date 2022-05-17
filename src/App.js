@@ -1,7 +1,10 @@
 import "./App.css";
-
+import { Component } from 'react';
+import { Auth } from 'aws-amplify'
+import React from 'react'
 //Router
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
+import {SideNavigation} from "./components/views"
 
 ///////Components
 
@@ -16,7 +19,7 @@ import {
   RC4Container,
   UserProfileContainer,
   DESContainer,
-  Account
+
 } from './components/containers';
 
 //Files for the Articles
@@ -29,9 +32,49 @@ import{
 } from './components/articles'
 
 // Routing for the website overall
-const App = () => {
-  return (
+class App extends Component {
+  state = {
+    isAuthenticated: false,
+    isAuthenticating: true,
+    user: null
+  }
+
+  setAuthStatus = authenticated => {
+    this.setState({ isAuthenticated: authenticated });
+  }
+
+  setUser = user => {
+    this.setState({ user: user });
+  }
+
+  async componentDidMount(){
+    try{
+      const session = await Auth.currentSession();
+      this.setAuthStatus(true);
+      console.log(session);
+      const user = await Auth.currentAuthenticatedUser();
+      this.setUser(user);
+      console.log(user.attributes.email)
+    }
+    catch(error){
+      console.log(error)
+    }
+    this.setState({ isAuthenticating: false });
+  }
+
+  render(){
+    const authProps = {
+      isAuthenticated: this.state.isAuthenticated,
+      user: this.state.user,
+      setAuthStatus: this.setAuthStatus,
+      setUser: this.setUser
+    }
+    return(
+    !this.state.isAuthenticating &&
     <div className="App">
+     <Router>
+     <div>
+    <SideNavigation auth={authProps}/>
       <Switch>
         <Route exact path="/" component={HomePageContainer} />
         <Route exact path="/Caesar-Cipher" component={CaesarCipherContainer} />
@@ -48,8 +91,11 @@ const App = () => {
         <Route exact path="/UserProfile/:id" component ={UserProfileContainer}/>
         <Route exact path="/RC4-Cipher" component={RC4Container} />
       </Switch>
+        </div>
+       </Router>
     </div>
-  );
+  )
+  }
 }
 
 export default App;

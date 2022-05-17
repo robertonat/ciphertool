@@ -1,7 +1,8 @@
-import React, { Component ,useState, useEffect, useRef} from "react";
+import React, { Component } from "react";
 import CaesarCipherView from '../views/CaesarCipherView';
-import CaesarCipherDial from '../images/caesar_cipher_dial.png';
-import CaesarCipher from '../images/top.png'
+import { DataStore } from '@aws-amplify/datastore';
+import { UserInformation } from '../../models';
+import { Auth } from 'aws-amplify'
 
 class CaesarCipherContainer extends Component {
   constructor(props){
@@ -10,13 +11,19 @@ class CaesarCipherContainer extends Component {
          initial: "",
          encrypted: "",
          numOfShifts: 0,
-         animation: "off"
+         animation: "off",
+         userid: "",
+         lastShift: 0
        };
    } // sets the state to have the necessary variables for working the encryption
 
-
+   caesarCipherWheel = () => {
+    let change = Number(this.state.numOfShifts)*(360/26)
+    document.getElementById('lettersid').style.transform="rotate("+change.toString()+"deg)";
+   }
 
    caesarCipherAnimation = async () => {
+     await this.caesarCipherWheel();
      await this.caesarCipher(); //runs the caesarCipher function and makes this function wait for it to finish.
      document.getElementById("p1").innerHTML = this.state.initial;
      let ticks = 250; //sets the tick for the animation to 250. Plans are to change it to scale with text length
@@ -40,11 +47,12 @@ class CaesarCipherContainer extends Component {
           i++;
           }
         }
+        if(encryptedPlaceHolder.length <60) this.updateEncryptions(encryptedPlaceHolder);
       }
 
 
 
-    caesarCipher = () =>{
+    caesarCipher = async () =>{
       let alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('') //creates an array of the alphabet characters
       let lowerCaseStr = this.state.initial.toLowerCase(); //a lower case copy of the string
       let encrypted = ""
@@ -64,10 +72,30 @@ class CaesarCipherContainer extends Component {
       }
       document.getElementById("p1").innerHTML = encrypted; //updates the webpage with the encrypted text
       if(this.state.animation === "on"){ //if the animation is enabled it saves the encrypted value for the animation function.
-      this.setState({
-        ['encrypted']: encrypted
+      await this.setState({
+        encrypted: encrypted
         });
       }
+
+      if(encrypted.length <60) this.updateEncryptions(encrypted);
+    }
+
+    updateEncryptions = async (encryption) =>{
+      const singleUser = await DataStore.query(UserInformation, this.state.userid);
+      console.log(this.state.userid)
+      let newEncryptions = []
+      if(singleUser.SavedEncryptions.length<1){newEncryptions = newEncryptions + encryption}
+      else {
+      newEncryptions = newEncryptions + encryption +","
+      newEncryptions = newEncryptions + singleUser.SavedEncryptions.slice(0,15)
+      }
+      console.log(singleUser.SavedEncryptions.length)
+
+      /* Models in DataStore are immutable. To update a record you must use the copyOf function
+      to apply updates to the item’s fields rather than mutating the instance directly */
+      await DataStore.save(UserInformation.copyOf(singleUser, item => {
+        item.SavedEncryptions = newEncryptions.split(",");// Update the values on {item} variable to update DataStore entry
+      }));
     }
 
    handleChange = event => {
@@ -76,15 +104,15 @@ class CaesarCipherContainer extends Component {
       });
   }
 
-  handleShiftChange = event => {
-    this.setState({
+   handleShiftChange = async event => {
+    await this.setState({
       [event.target.name]: event.target.value //updates the states value to the most recently inputted value on the form
-     });
-     let change = event.target.value *15;
-
-    document.getElementById('letters').style.transform="rotate("+change.toString()+")";
-    alert("shift change")
+    });
+     if(this.state.animation=== "on"){
+      this.caesarCipherWheel();
+     }
  }
+
 
   handleSubmit = async event => {
         event.preventDefault();
@@ -92,8 +120,19 @@ class CaesarCipherContainer extends Component {
           this.caesarCipherAnimation();
       }
         else{this.caesarCipher();}
+  }
+
+  async componentDidMount(){
+    try{
+      const user = await Auth.currentAuthenticatedUser();
+      const userMod = await DataStore.query(UserInformation, c => c.email("eq" ,user.attributes.email));
+      this.setState({ userid: userMod[0].id});
+    }
+    catch(error){
+      console.log(error)
     }
 
+  }
 
 
   render() {
