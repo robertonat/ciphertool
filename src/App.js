@@ -71,8 +71,7 @@ class App extends Component {
     }
     return(
     !this.state.isAuthenticating &&
-    <div className="App">
-     <Router>
+    <div className="App"> 
      <div>
     <SideNavigation auth={authProps}/>
       <Switch>
@@ -92,7 +91,6 @@ class App extends Component {
         <Route exact path="/RC4-Cipher" component={RC4Container} />
       </Switch>
         </div>
-       </Router>
     </div>
   )
   }

@@ -13,7 +13,7 @@ class RC4Container extends Component {
          userid: ""
        };
    }
-   async componentDidMount(){
+  /* async componentDidMount(){
      try{
        const user = await Auth.currentAuthenticatedUser();
        const userMod = await DataStore.query(UserInformation, c => c.email("eq" ,user.attributes.email));
@@ -22,7 +22,7 @@ class RC4Container extends Component {
      catch(error){
        console.log(error)
      }
-   }
+   }*/
 
    updateEncryptions = async (encryption) =>{
      const singleUser = await DataStore.query(UserInformation, this.state.userid);
