@@ -13,10 +13,10 @@ class SignUpContainer extends Component {
        username: "",
        email: "",
        phone: "",
+       password: "",
+       password2: "",
        redirect: false,
        redirectId: null,
-
-
      };
  }
 
@@ -26,13 +26,28 @@ class SignUpContainer extends Component {
    });
  }
 
+ validateForm = () => {
+   if(!(this.state.password === this.state.password2)) {
+     alert("passwords dont match")
+     return false;
+   }
+   alert(this.state.phone)
+   let reg = new RegExp('^[0-9]{10}$');
+   if(!(reg.test(this.state.phone))){
+     alert("invalid phone number")
+     return false;
+   }
+   return true;
+ }
 
 
  handleSubmit = async event => {
      event.preventDefault();
+    if(!this.validateForm()){return}
      UserPool.signUp(this.state.email, this.state.password, [], null, (err,data) =>{
        if(err){
          alert("Email or Password unaccepted");
+         console.log(err)
        }
        else{
          let user = {
@@ -75,6 +90,7 @@ class SignUpContainer extends Component {
      }
   return (
     <SignUpView
+    handlePhoneChange = {this.handlePhoneChange}
     handleChange = {this.handleChange}
     handleSubmit={this.handleSubmit}
           />

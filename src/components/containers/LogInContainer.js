@@ -26,10 +26,15 @@ class LogInContainer extends Component{
 
       }
       verificationSetUp = event =>{
+        console.log("verification set up is starting")
         const verificationCode = Math.floor(Math.random() * (9999 - 1000 + 1) + 1000)
         this.setState({
           verificationCode: verificationCode
         })
+        let message = "Here is your verification code " + String(verificationCode);
+        let recipient = "13479684013"
+        fetch(`http://127.0.0.1:4000/send-text?recipient=${recipient}&textmessage=${message}`)
+    .catch(err => console.error(err))
 
       }
 

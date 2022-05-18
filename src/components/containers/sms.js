@@ -8,24 +8,34 @@ const accountSid = "AC4153f4a48b9ac678e7a598924c89d568";
 const authToken = "d6a0b70be3784c3dfa85003e793fb90f";
 const bodyText = "This is your authentication code "
 const userPhone = "+13479684013"
-
+const twilioPhone = '+19706968810'
 
 const client = require('twilio')(accountSid, authToken);
 
 const app = express();
 
-app.use(cors());
+app.use(cors()); //Blocks browser from restricting any data
 
+//Welcome Page for the Server
 app.get('/', (req, res) => {
     res.send('Welcome to the Express Server')
 })
 
-client.messages
-  .create({
-     body: (bodyText + verificationCode),
-     from: '+19706968810',
-     to: (userPhone)
-   })
-  .then(message => console.log(message.sid));
+//Twilio
+app.get('/send-text', (req, res) => {
+    //Welcome Message
+    res.send('Hello to the Twilio Server')
 
-export {verificationCode};
+    //_GET Variables
+    const { recipient, textmessage } = req.query;
+
+
+    //Send Text
+    client.messages.create({
+        body: textmessage,
+        to: recipient,  // Text this number
+        from: '+19706968810' // From a valid Twilio number
+    }).then((message) => console.log(message.body));
+})
+
+app.listen(4000, () => console.log("Running on Port 4000"))

@@ -57,10 +57,13 @@ document.title = "User profile";
         <div id ="List body"> </div>
       </div>
 
+
     </div>
 
-    <div class ="learnMore">
-      <strong> Learn more </strong>
+    <div class = "quizProgression">
+    <strong>Quiz progression </strong><br/>
+    <strong>Quiz 0: </strong><br/>
+    <strong>RC4 Quiz: </strong><br/>
     </div>
 
 
