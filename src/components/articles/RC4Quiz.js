@@ -10,6 +10,7 @@ class RC4Quiz extends Component{
   constructor(props){
        super(props);
        this.state = {
+         loggedIn: false,
          Q1: "",
          Q2: "",
          Q3: "",
@@ -19,8 +20,16 @@ class RC4Quiz extends Component{
          incorrect: [],
        };
    }
-   componentDidMount() {
+   async componentDidMount() {
     window.scrollTo(0,0);
+    try{
+      const user = await Auth.currentAuthenticatedUser();
+      await this.setState({ loggedIn:true});
+    }
+    catch(error){
+      this.setState({loggedIn:false});
+      console.log(error)
+    }
   }
 
   async submitScore(){
@@ -58,12 +67,12 @@ class RC4Quiz extends Component{
        if(this.state.Q4 === "RSA") this.state.correct ++;
        else{this.state.incorrect[this.state.incorrect.length] = 4}
 
-       if(this.state.Q5 == "Stream cipher") this.state.correct ++;
+       if(this.state.Q5 === "Stream cipher") this.state.correct ++;
        else{this.state.incorrect[this.state.incorrect.length] = 5}
 
        let results = String(this.state.correct);
        await this.submitScore();
-       if(this.state.correct == 5){ document.getElementById("result").innerHTML = "Congratulations you got all 5 questions correct";}
+       if(this.state.correct === 5){ document.getElementById("result").innerHTML = "Congratulations you got all 5 questions correct";}
        else{document.getElementById("result").innerHTML = "you got " + results + " right. These are the questions missed " + this.state.incorrect ;}
 
        this.state.correct = 0;
@@ -71,6 +80,11 @@ class RC4Quiz extends Component{
      }
 
   render(){
+    if(!this.state.loggedIn){
+      return(
+        <p> Please <Link to="../../login">log in</Link> to access these quizzes</p>
+      )
+    }
   return(
     <div>
   <RC4QuizView

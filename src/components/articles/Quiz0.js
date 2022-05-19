@@ -10,6 +10,7 @@ class Quiz0 extends Component{
   constructor(props){
        super(props);
        this.state = {
+         loggedIn: false,
          subcipher: "",
          encryptcaesars5: "",
          encryptrot13: "",
@@ -23,8 +24,16 @@ class Quiz0 extends Component{
        };
    }
 
-   componentDidMount() {
+   async componentDidMount() {
     window.scrollTo(0,0);
+    try{
+      const user = await Auth.currentAuthenticatedUser();
+      await this.setState({ loggedIn:true});
+    }
+    catch(error){
+      this.setState({loggedIn:false});
+      console.log(error)
+    }
 
   }
   async submitScore(){
@@ -85,6 +94,11 @@ class Quiz0 extends Component{
      }
 
   render(){
+    if(!this.state.loggedIn){
+      return(
+        <p> Please <Link to="../../login">log in</Link> to access these quizzes</p>
+      )
+    }
   return(
     <div>
   <Quiz0View

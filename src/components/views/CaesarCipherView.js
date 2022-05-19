@@ -24,7 +24,7 @@ const CaesarCipherView = (props) => {
             name="initial"
             rows="10"
             cols="50"
-            required="true"
+            required={true}
             onChange={(e) => handleChange(e)}
           />
 
@@ -37,7 +37,7 @@ const CaesarCipherView = (props) => {
           <input
             type="number"
             name="numOfShifts"
-            required="true"
+            required={true}
             steps="1.0"
             min="0"
             max="26"

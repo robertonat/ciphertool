@@ -62,8 +62,15 @@ document.title = "User profile";
 
     <div class = "quizProgression">
     <strong>Quiz progression </strong><br/>
-    <strong>Quiz 0: </strong><br/>
-    <strong>RC4 Quiz: </strong><br/>
+    <div>
+      <p id="quiz0">
+      </p>
+      </div>
+
+      <div>
+        <p id="RC4Quiz">
+        </p>
+        </div>
     </div>
 
 

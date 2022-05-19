@@ -14,6 +14,7 @@ class LogInContainer extends Component{
   constructor(props){
           super(props);
           this.state = {
+            username: "",
             email: "",
             password: "",
             redirect: false,
@@ -30,7 +31,7 @@ class LogInContainer extends Component{
 
       verificationSubmit = event =>{
         if(event.target.value === this.verificationCode){
-          this.setState({ redirect:true });
+          this.setState({ redirect:true, verify:false, redirectId:this.state.username });
         }
         else{
         this.setState({verify:false, redirectId:null})
@@ -38,8 +39,8 @@ class LogInContainer extends Component{
       }
       }
 
-      skipVerification = () =>{
-        this.setState({redirect:true})
+      skipVerification = event =>{
+        this.setState({redirect:true, verify:false, redirectId:this.state.username })
       }
 
 
@@ -51,10 +52,10 @@ class LogInContainer extends Component{
 
         const apiName = 'twilio';
         const path = '/twilio';
-        console.log("verification set up is starting")
+
         const verificationCode = Math.floor(Math.random() * (9999 - 1000 + 1) + 1000)
         this.setState({
-          verificationCode: verificationCode
+          verificationCode: verificationCode, username: singleUser.UserName
         })
         API.get(apiName, path + "/" + String(singleUser.phone) +"/" + String(verificationCode));
       }
@@ -102,7 +103,8 @@ class LogInContainer extends Component{
     if(this.state.verify){
       return(
         <VerificationView
-        verificationSubmit= {this.verificationSubmit}/>
+        verificationSubmit= {this.verificationSubmit}
+        skipVerification = {this.skipVerification}/>
       )
     }
 

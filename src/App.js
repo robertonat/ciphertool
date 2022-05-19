@@ -55,11 +55,9 @@ class App extends Component {
   async componentDidMount(){
     try{
       const session = await Auth.currentSession();
-      this.setAuthStatus(true);
-      console.log(session);
+      this.setAuthStatus(true)
       const user = await Auth.currentAuthenticatedUser();
       this.setUser(user);
-      console.log(user.attributes.email)
     }
     catch(error){
       console.log(error)

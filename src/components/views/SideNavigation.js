@@ -14,10 +14,15 @@ class SideNavigation extends Component {
   }
   async componentDidMount(){
     this.setState({redirect:false})
-    const user = await DataStore.query(UserInformation, c => c.email("eq" ,this.props.auth.user.attributes.email));
-    const userid = user[0].id
-    const singleUser = await DataStore.query(UserInformation, userid);
-    this.setState({ userName: singleUser.UserName });
+    try {
+     await Auth.currentAuthenticatedUser();
+     const user = await DataStore.query(UserInformation, c => c.email("eq" ,this.props.auth.user.attributes.email));
+     const userid = user[0].id
+     const singleUser = await DataStore.query(UserInformation, userid);
+     this.setState({ userName: singleUser.UserName });
+ } catch {
+     return;
+ }
   }
   componentWillUnmount() {
       this.setState({redirect: false});
@@ -62,11 +67,11 @@ class SideNavigation extends Component {
           </div>
           <div>
           {!this.props.auth.isAuthenticated && (
-            <body>
+            <div>
           <Link to={"/Login"}>Log in</Link>
           <br/>
           <Link to={"/Signup"}>Sign up</Link>
-          </body>
+          </div>
         )}
         </div>
         {this.props.auth.isAuthenticated && (

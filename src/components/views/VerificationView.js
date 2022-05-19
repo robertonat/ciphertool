@@ -1,6 +1,6 @@
 
 const VeriticationView = (props) => {
-const {verificationSubmit} = props;
+const {verificationSubmit, skipVerification} = props;
 document.title = "User profile";
 return (
   <div>
@@ -12,6 +12,7 @@ return (
       <input id="userloginput" type="text" name="verificationCode"/>
     </div>
   </form >
+  <button onClick={(e) => skipVerification(e)}>Skip verification </button> <p>(purely for testing/twilio limitation purposes) </p>
   </div>
 )
 }
