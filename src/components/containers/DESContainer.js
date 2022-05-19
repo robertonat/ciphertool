@@ -11,7 +11,7 @@ class DESContainer extends Component{
          initial: "",
          encrypted: "",
          key: "",
-         userid: ""
+         userid: "",
        };
    }
    async componentDidMount(){
@@ -25,14 +25,43 @@ class DESContainer extends Component{
      }
    }
 
-  Des= ()=>{
+  Des= async ()=>{
     let CryptoJS = require("crypto-js")
-    let encrypted = CryptoJS.DES.encrypt(this.state.initial, this.state.key);
+    let encrypted = String(CryptoJS.DES.encrypt(this.state.initial, this.state.key));
     document.getElementById("p1").innerHTML = encrypted;
     this.setState({
       encrypted: encrypted
       });
-    this.updateEncryptions(encrypted);
+  }
+
+
+  DesAnimation= async ()=>{
+    await this.Des();
+
+    document.getElementById("p1").innerHTML = this.state.initial;
+
+    let ticks = 150;
+    let encryptedPlaceHolder = this.state.encrypted;
+    let initialPlaceHolder = this.state.initial;
+
+    let i = 0;
+
+    let timer = setInterval(onTick, ticks);
+    function onTick(){
+      if (i === (encryptedPlaceHolder.length)) {
+     clearInterval(timer);
+       }
+     else {
+     let temp = initialPlaceHolder.split('')
+     temp[i] = encryptedPlaceHolder[i];
+     initialPlaceHolder = temp.join('')
+     document.getElementById("p1").innerHTML = temp.join('');
+       i++;
+   }
+
+    }
+
+
   }
 
    handleChange = event => {
@@ -44,10 +73,14 @@ class DESContainer extends Component{
   handleSubmit = async event => {
         event.preventDefault();
         if(this.state.animation === "on"){
-          this.DesAnimation();
+          await this.DesAnimation();
+          if(this.state.encrypted.length <60) this.updateEncryptions(this.state.encrypted);
         }
 
-        else this.Des();
+        else {
+          await this.Des();
+          if(this.state.encrypted.length <60) this.updateEncryptions(this.state.encrypted);
+      }
 
     }
 

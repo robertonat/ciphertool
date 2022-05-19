@@ -10,10 +10,11 @@ class RC4Container extends Component {
          initial: "",
          encrypted: "",
          key: "",
-         userid: ""
+         userid: "",
+         animation: "off"
        };
    }
-  /* async componentDidMount(){
+   async componentDidMount(){
      try{
        const user = await Auth.currentAuthenticatedUser();
        const userMod = await DataStore.query(UserInformation, c => c.email("eq" ,user.attributes.email));
@@ -22,7 +23,7 @@ class RC4Container extends Component {
      catch(error){
        console.log(error)
      }
-   }*/
+   }
 
    updateEncryptions = async (encryption) =>{
      const singleUser = await DataStore.query(UserInformation, this.state.userid);
@@ -95,7 +96,7 @@ class RC4Container extends Component {
      this.setState({
        encrypted: res
        });
-      this.updateEncryptions(res);
+       if(this.state.encrypted.length <60) this.updateEncryptions(res);
      }
 
 
@@ -109,11 +110,13 @@ class RC4Container extends Component {
   handleSubmit = async event => {
         event.preventDefault();
         if(this.state.animation === "on"){
-          this.RC4CipherAnimation();
+          await this.RC4CipherAnimation();
+
         }
 
-        else this.RC4Cipher();
-
+        else {await this.RC4Cipher();
+          if(this.state.encrypted.length <60) this.updateEncryptions(this.state.encrypted);
+}
     }
    render() {
    return (
