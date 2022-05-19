@@ -4,6 +4,11 @@ import LogInView from '../views/LogInView';
 import VerificationView from '../views/VerificationView'
 import UserPool from "./UserPool"
 import { CognitoUser, AuthenticationDetails } from "amazon-cognito-identity-js";
+import Amplify, { API } from 'aws-amplify';
+import awsconfig from '../../aws-exports';
+import { Auth } from 'aws-amplify'
+import { DataStore } from '@aws-amplify/datastore';
+import { UserInformation } from '../../models';
 
 class LogInContainer extends Component{
   constructor(props){
@@ -22,20 +27,36 @@ class LogInContainer extends Component{
           [event.target.name]: event.target.value
         });
       }
-      verificationSubmit = event =>{
 
+      verificationSubmit = event =>{
+        if(event.target.value === this.verificationCode){
+          this.setState({ redirect:true });
+        }
+        else{
+        this.setState({verify:false, redirectId:null})
+        Auth.signOut();
       }
-      verificationSetUp = event =>{
+      }
+
+      skipVerification = () =>{
+        this.setState({redirect:true})
+      }
+
+
+
+      verificationSetUp = async event =>{
+        const user = await Auth.currentAuthenticatedUser();
+        const userMod = await DataStore.query(UserInformation, c => c.email("eq" ,user.attributes.email));
+        const singleUser = await DataStore.query(UserInformation, userMod[0].id);
+
+        const apiName = 'twilio';
+        const path = '/twilio';
         console.log("verification set up is starting")
         const verificationCode = Math.floor(Math.random() * (9999 - 1000 + 1) + 1000)
         this.setState({
           verificationCode: verificationCode
         })
-        let message = "Here is your verification code " + String(verificationCode);
-        let recipient = "13479684013"
-        fetch(`http://127.0.0.1:4000/send-text?recipient=${recipient}&textmessage=${message}`)
-    .catch(err => console.error(err))
-
+        API.get(apiName, path + "/" + String(singleUser.phone) +"/" + String(verificationCode));
       }
 
       handleSubmit = async event => {

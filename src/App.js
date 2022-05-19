@@ -36,6 +36,7 @@ import{
 
 // Routing for the website overall
 Amplify.configure(awsconfig);
+
 class App extends Component {
   state = {
     isAuthenticated: false,

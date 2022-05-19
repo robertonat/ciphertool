@@ -31,7 +31,6 @@ class SignUpContainer extends Component {
      alert("passwords dont match")
      return false;
    }
-   alert(this.state.phone)
    let reg = new RegExp('^[0-9]{10}$');
    if(!(reg.test(this.state.phone))){
      alert("invalid phone number")
