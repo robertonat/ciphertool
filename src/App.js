@@ -2,6 +2,9 @@ import "./App.css";
 import { Component } from 'react';
 import { Auth } from 'aws-amplify'
 import React from 'react'
+import Amplify, { API } from 'aws-amplify';
+import awsconfig from './aws-exports';
+
 //Router
 import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
 import {SideNavigation} from "./components/views"
@@ -32,6 +35,7 @@ import{
 } from './components/articles'
 
 // Routing for the website overall
+Amplify.configure(awsconfig);
 class App extends Component {
   state = {
     isAuthenticated: false,
@@ -71,7 +75,7 @@ class App extends Component {
     }
     return(
     !this.state.isAuthenticating &&
-    <div className="App"> 
+    <div className="App">
      <div>
     <SideNavigation auth={authProps}/>
       <Switch>

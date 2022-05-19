@@ -1,7 +1,7 @@
 import "./LoginView.css"
 const SignUpView = (props) => {
   document.title = "Sign Up";
-  const { handlePhoneChange, handleChange, handleSubmit } = props;
+  const {  handleChange, handleSubmit } = props;
   return (
     <div>
       <div class="userbox">
@@ -18,7 +18,9 @@ const SignUpView = (props) => {
         <div>
           <label id="userloglabel" htmlFor="userName">Phone Number</label>
           <input id="userloginput" type="text" name="phone" onChange={(e) => handleChange(e)} />
+          <p class="passwordReqs">(10 digits no special characters)</p> <br/><br/>
         </div>
+
         <div>
           <label id="userloglabel" htmlFor="password">Password</label>
           <input id="userloginput" type="password" name="password" onChange={(e) => handleChange(e)} />

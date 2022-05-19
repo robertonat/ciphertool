@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "paths": {
+    "/send-text": {
+      "name": "/send-text",
+      "lambdaFunction": "text",
+      "permissions": {
+        "setting": "open"
+      }
+    }
+  }
+}

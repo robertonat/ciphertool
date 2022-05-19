@@ -90,7 +90,6 @@ class SignUpContainer extends Component {
      }
   return (
     <SignUpView
-    handlePhoneChange = {this.handlePhoneChange}
     handleChange = {this.handleChange}
     handleSubmit={this.handleSubmit}
           />

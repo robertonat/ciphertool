@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "paths": {
+    "/twilio/{recipient}/{message}": {
+      "name": "/twilio/{recipient}/{message}",
+      "lambdaFunction": "twiliosms",
+      "permissions": {
+        "setting": "open"
+      }
+    }
+  }
+}
